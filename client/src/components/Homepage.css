@@ -1,0 +1,53 @@
+/* Homepage.css */
+.homepage-container {
+  width: 100vw;
+  height: 100vh;
+  background-color: #2d2269;
+  display: flex;
+  flex-direction: column;
+}
+
+.title-container {
+  margin: 4rem;
+  text-align: center;
+  color: white;
+  font-size: 2rem;
+}
+
+.title {
+  font-size: 6rem;
+}
+
+/* CSS button style imported from https://getcssscan.com/css-buttons-examples*/
+.book-hotel {
+  margin: 4rem;
+  background: #5e5df0;
+  border-radius: 999px;
+  box-shadow: #5e5df0 0 10px 20px -10px;
+  box-sizing: border-box;
+  color: #ffffff;
+  cursor: pointer;
+  font-family: Inter, Helvetica, "Apple Color Emoji", "Segoe UI Emoji",
+    NotoColorEmoji, "Noto Color Emoji", "Segoe UI Symbol", "Android Emoji",
+    EmojiSymbols, -apple-system, system-ui, "Segoe UI", Roboto, "Helvetica Neue",
+    "Noto Sans", sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 24px;
+  opacity: 1;
+  outline: 0 solid transparent;
+  padding: 14px 18px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: fit-content;
+  word-break: break-word;
+  border: 0;
+}
+
+.icon-button-container {
+  margin: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
