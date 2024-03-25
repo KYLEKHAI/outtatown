@@ -1,11 +1,12 @@
-const Pool = require("pg").Pool;
+const {Pool} = require("pg").Pool;
 
-/* CONNECT WITH ACTUAL POSTGRES DATABASE
+//CONNECT WITH POSTGRES DATABASE
 const pool = new Pool({
-    user,
-    password,
-    host,
-    port,
-    database
+    user: "postgres",
+    password: "rootUser",
+    host: "localhost",
+    port: 5432,
+    database: "Outtatown"
 });
-*/
+
+pool.connect();
