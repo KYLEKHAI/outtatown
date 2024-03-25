@@ -1,12 +1,22 @@
-const {Pool} = require("pg").Pool;
+const {Client} = require("pg");
 
 //CONNECT WITH POSTGRES DATABASE
-const pool = new Pool({
+const client = new Client({
     user: "postgres",
-    password: "rootUser",
+    password: "Rayan2004*",
     host: "localhost",
     port: 5432,
     database: "Outtatown"
 });
 
-pool.connect();
+client.connect();
+
+
+client.query(`Select * from "Outtatown Web App"."HotelChain" Where "ChainID" = 5000`, (err, res) => {
+    if (!err){
+        console.log(res.rows);
+    } else {
+        console.log(err.message)
+    }
+    client.end();
+})
