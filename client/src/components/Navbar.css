@@ -35,7 +35,7 @@ body {
   font-size: 1.3rem;
 }
 
-.nav li.active {
+.nav li a.active {
   text-decoration: underline;
 }
 
@@ -45,4 +45,23 @@ body {
 
 .site-title {
   font-size: 2rem;
+}
+
+.sign-in {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bolder;
+  color: #6e65a6;
+  margin-right: 30px;
+  margin-left: 15px;
+}
+
+.sign-up {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bolder;
+  color: #6e65a6;
+  margin-right: 30px;
 }

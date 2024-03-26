@@ -1,7 +1,12 @@
 import React from "react";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
+
+// Import CSS
 import "./Homepage.css";
+
+// Import React Router Link component
+import { Link } from "react-router-dom";
 
 // Initial homepage component on first entry to site
 
@@ -23,8 +28,9 @@ const Homepage = () => {
             colors="primary:#ebe6ef,secondary:#836fff"
             style={{ width: "200px", height: "200px" }}
           ></lord-icon>
-
-          <button class="book-hotel">Book A Hotel</button>
+          <Link to="/client-view">
+            <button class="book-hotel">Book A Hotel</button>
+          </Link>
         </div>
       </div>
       <Footer />

@@ -1,6 +1,10 @@
 // About Us page
-import React from "react";
-
+import React, { Fragment } from "react";
+import Navbar from "./Navbar";
 export default function AboutUs() {
-  return <h1>About Us</h1>;
+  return (
+    <Fragment>
+      <Navbar></Navbar>
+    </Fragment>
+  );
 }

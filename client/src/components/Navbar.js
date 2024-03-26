@@ -1,15 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
+import SignInModal from "./SignInModal";
+import SignUpModal from "./SignUpModal";
 
 // Import React Router Link component
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 // Import CSS
 import "./Navbar.css";
 
 export default function Navbar() {
+  const [signInModalOpen, setSignInModalOpen] = useState(false);
+  const [signUpModalOpen, setSignUpModalOpen] = useState(false);
+
+  const openSignUpModal = () => {
+    setSignInModalOpen(false);
+    setSignUpModalOpen(true);
+  };
+
   return (
     <nav className="nav">
-      <Link to="/" className="site-title">
+      <NavLink to="/" className="site-title">
         OuttaTown
         <lord-icon
           className="site-icon"
@@ -18,25 +28,42 @@ export default function Navbar() {
           colors="primary:#836fff"
           style={{ width: "80px", height: "70px" }}
         ></lord-icon>
-      </Link>
+      </NavLink>
 
       <ul>
-        <li className="active">
-          <Link to="/">Home</Link>
+        <li>
+          <NavLink to="/" activeClassName="active">
+            Home
+          </NavLink>
         </li>
         <li>
-          <Link to="/about">About Us</Link>
+          <NavLink to="/about" activeClassName="active">
+            About Us
+          </NavLink>
         </li>
-        <li className="sign-in">
-          <Link to="/signin" className="nav-button">
-            Sign In
-          </Link>
+        <li
+          className="sign-in nav-button"
+          onClick={() => setSignInModalOpen(true)}
+        >
+          Sign In
         </li>
-        <li className="sign-up">
-          <Link to="/signup" className="nav-button">
-            Sign Up
-          </Link>
+
+        <SignInModal
+          isOpen={signInModalOpen}
+          onClose={() => setSignInModalOpen(false)}
+          onOpenSignUp={openSignUpModal}
+        />
+        <li
+          className="sign-up nav-button"
+          onClick={() => setSignUpModalOpen(true)}
+        >
+          Sign Up
         </li>
+
+        <SignUpModal
+          isOpen={signUpModalOpen}
+          onClose={() => setSignUpModalOpen(false)}
+        />
       </ul>
     </nav>
   );
