@@ -51,7 +51,7 @@ const SignInModal = ({ isOpen, onClose, onOpenSignUp }) => {
                 type="text"
                 value={sinNumber}
                 onChange={(e) => setSinNumber(e.target.value)}
-                placeholder="SIN Number"
+                placeholder="SIN Number (XXXXXXXXX)"
                 maxLength={9}
               />
             </label>

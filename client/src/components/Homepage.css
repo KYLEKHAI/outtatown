@@ -1,7 +1,7 @@
 /* Homepage.css */
 .homepage-container {
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
   background-color: #2d2269;
   display: flex;
   flex-direction: column;

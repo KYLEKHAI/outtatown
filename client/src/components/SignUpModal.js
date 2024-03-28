@@ -112,7 +112,7 @@ const SignUpModal = ({ isOpen, onClose }) => {
                 type="text"
                 value={sinNumber}
                 onChange={(e) => setSinNumber(e.target.value)}
-                placeholder="SIN Number"
+                placeholder="SIN Number (XXXXXXXXX"
                 maxLength={9}
               />
             </label>
@@ -143,7 +143,7 @@ const SignUpModal = ({ isOpen, onClose }) => {
                 type="text"
                 value={province}
                 onChange={(e) => setProvince(e.target.value)}
-                placeholder="Province"
+                placeholder="Province (XX)"
               />
             </label>
           </div>
@@ -173,7 +173,7 @@ const SignUpModal = ({ isOpen, onClose }) => {
                 type="text"
                 value={postalCode}
                 onChange={(e) => setPostalCode(e.target.value)}
-                placeholder="Postal Code"
+                placeholder="Postal Code (XXXXXX)"
               />
             </label>
           </div>
