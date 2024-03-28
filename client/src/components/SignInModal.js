@@ -27,6 +27,9 @@ const SignInModal = ({ isOpen, onClose, onOpenSignUp }) => {
     // Validate SIN Number here (required to have 9 numbers)
     if (sinNumber.length === 9 && !isNaN(sinNumber)) {
       console.log("Signing in with SIN Number:", sinNumber);
+
+      // Go to ClientView.js on successful sign in
+      window.location.href = "/client-view";
     } else {
       alert("Please enter a valid SIN Number (9 digits)");
     }

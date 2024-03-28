@@ -1,16 +1,27 @@
-import React from "react";
+// Initial homepage component on first entry to site
+import React, { useState } from "react";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
+import HomepageModal from "./HomepageModal";
 
 // Import CSS
 import "./Homepage.css";
 
-// Import React Router Link component
-import { Link } from "react-router-dom";
-
-// Initial homepage component on first entry to site
-
 const Homepage = () => {
+  const [showHomepageModal, setShowHomepageModal] = useState(false);
+
+  const openHomepageModal = () => {
+    setShowHomepageModal(true);
+  };
+
+  const closeHomepageModal = () => {
+    setShowHomepageModal(false);
+  };
+
+  const handleContinue = () => {
+    // Logic for continue button
+  };
+
   return (
     <div className="homepage-container">
       <Navbar />
@@ -28,12 +39,18 @@ const Homepage = () => {
             colors="primary:#ebe6ef,secondary:#836fff"
             style={{ width: "200px", height: "200px" }}
           ></lord-icon>
-          <Link to="/client-view">
-            <button class="book-hotel">Book A Hotel</button>
-          </Link>
+          <button className="book-hotel" onClick={openHomepageModal}>
+            Find Hotels
+          </button>
         </div>
       </div>
       <Footer />
+
+      <HomepageModal
+        isOpen={showHomepageModal}
+        onClose={closeHomepageModal}
+        onContinue={handleContinue}
+      />
     </div>
   );
 };
