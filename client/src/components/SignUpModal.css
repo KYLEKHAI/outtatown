@@ -25,8 +25,24 @@
 }
 
 .signUpModal::-webkit-scrollbar {
-  width: 0;
-  height: 0;
+  width: 7px;
+}
+
+.signUpModal::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 100px;
+}
+
+.signUpModal::-webkit-scrollbar-track-piece:start {
+  margin-top: 20px;
+}
+
+.signUpModal::-webkit-scrollbar-track-piece:end {
+  margin-bottom: 20px;
+}
+
+.signUpModal::-webkit-scrollbar-thumb:hover {
+  background: #888;
 }
 
 .form-group {
