@@ -3,7 +3,7 @@ const {Client} = require("pg");
 //CONNECT WITH POSTGRES DATABASE
 const client = new Client({
     user: "postgres",
-    password: "Rayan2004*",
+    password: "Outtatown",
     host: "localhost",
     port: 5432,
     database: "Outtatown"
@@ -12,11 +12,13 @@ const client = new Client({
 client.connect();
 
 
-client.query(`Select * from "Outtatown Web App"."HotelChain" Where "ChainID" = 5000`, (err, res) => {
+client.query(`SELECT "Name" FROM "Outtatown Web App"."Hotel" ORDER BY "Name" ASC`, (err, res) => {
     if (!err){
         console.log(res.rows);
     } else {
         console.log(err.message)
     }
     client.end();
-})
+});
+
+module.exports = client;
