@@ -112,7 +112,7 @@ const SignUpModal = ({ isOpen, onClose }) => {
                 type="text"
                 value={sinNumber}
                 onChange={(e) => setSinNumber(e.target.value)}
-                placeholder="SIN Number (XXXXXXXXX"
+                placeholder="SIN Number (XXXXXXXXX)"
                 maxLength={9}
               />
             </label>
@@ -151,9 +151,9 @@ const SignUpModal = ({ isOpen, onClose }) => {
             <label>
               <input
                 type="text"
-                value={streetName}
-                onChange={(e) => setStreetName(e.target.value)}
-                placeholder="Street Name"
+                value={houseNumber}
+                onChange={(e) => setHouseNumber(e.target.value)}
+                placeholder="House Number"
               />
             </label>
           </div>
@@ -161,12 +161,13 @@ const SignUpModal = ({ isOpen, onClose }) => {
             <label>
               <input
                 type="text"
-                value={houseNumber}
-                onChange={(e) => setHouseNumber(e.target.value)}
-                placeholder="House Number"
+                value={streetName}
+                onChange={(e) => setStreetName(e.target.value)}
+                placeholder="Street Name"
               />
             </label>
           </div>
+
           <div className="form-group">
             <label>
               <input
