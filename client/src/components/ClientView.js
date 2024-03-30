@@ -2,6 +2,8 @@
 
 import React, { useState } from "react";
 import NavbarHotel from "./NavbarHotel";
+import Footer from "./Footer";
+import HotelResults from "./HotelResults";
 import Help from "./Help";
 
 // Import CSS
@@ -257,6 +259,8 @@ const ClientView = () => {
         </div>
       </div>
       <Help isOpen={isHelpModalOpen} onClose={closeHelpModal} />
+      <HotelResults />
+      <Footer />
     </div>
   );
 };
