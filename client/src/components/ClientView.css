@@ -1,0 +1,223 @@
+.views-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 0.5rem;
+  background-color: #2d2269;
+}
+.view {
+  cursor: pointer;
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  margin-right: 2rem;
+  font-size: 1.2rem;
+  background-color: #ecf2ff;
+  color: #000000;
+  margin-top: 0.5rem;
+  font-weight: bolder;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.3s ease;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 3);
+}
+
+.view:active {
+  transform: scale(0.9);
+}
+
+.view.active {
+  background-color: #5a23ce;
+  transform: scale(1.13);
+  transition: transform 0.3s ease;
+  color: #ecf2ff;
+}
+.client-view-container {
+  color: white;
+  text-align: center;
+}
+
+.client-view-title {
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: white;
+  font-size: 2.5rem;
+}
+
+.view-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.filter-menu {
+  margin: 2rem auto;
+  padding: 20px;
+  color: #2d2269;
+  background-color: #ecf2ff;
+  border: 8px solid #836fff;
+  border-radius: 15px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.filter-menu-title-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.filter-title-paragraph {
+  color: #2d2269;
+  font-size: 1.5rem;
+  padding: 0.5rem;
+  font-weight: bold;
+}
+
+.filter-paragraph-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.filter-elements-container {
+  border: solid 4px #2d2269;
+  border-radius: 20px;
+  padding: 30px;
+}
+.search-icon-container {
+  margin-left: 20px;
+}
+.search-options {
+  margin-bottom: 0.5rem;
+}
+
+.filter-search {
+  margin-top: 0.5rem;
+}
+
+.rating-price-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.price-range {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.price-range label {
+  margin-right: 0.5rem;
+}
+
+.rating {
+  margin-right: 200px;
+}
+
+.rating label {
+  margin: 0.5rem;
+}
+
+.filter-subtitle {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.input-field {
+  border-radius: 20px;
+  padding: 12px 16px;
+  border: 1px solid #ccc;
+  margin: 1rem;
+}
+
+.filter-search {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.search-button {
+  margin-top: 20px;
+  background: #5e5df0;
+  border-radius: 999px;
+  box-shadow: #5e5df0 0 10px 20px -10px;
+  box-sizing: border-box;
+  color: #ffffff;
+  cursor: pointer;
+  font-family: Inter, Helvetica, "Apple Color Emoji", "Segoe UI Emoji",
+    NotoColorEmoji, "Noto Color Emoji", "Segoe UI Symbol", "Android Emoji",
+    EmojiSymbols, -apple-system, system-ui, "Segoe UI", Roboto, "Helvetica Neue",
+    "Noto Sans", sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 24px;
+  opacity: 1;
+  outline: 0 solid transparent;
+  padding: 14px 18px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: 300px;
+  word-break: break-word;
+  border: 0;
+}
+
+.search-button:hover {
+  background-color: #4d4cc8;
+}
+.help-button {
+  background-color: #f05454;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 20px;
+  cursor: pointer;
+  outline: none;
+  text-decoration: none;
+  position: absolute;
+  left: 0;
+}
+
+.help-button:hover {
+  animation: wiggle 2s linear infinite;
+}
+
+/* Keyframes */
+@keyframes wiggle {
+  0%,
+  7% {
+    transform: rotateZ(0);
+  }
+  15% {
+    transform: rotateZ(-15deg);
+  }
+  20% {
+    transform: rotateZ(10deg);
+  }
+  25% {
+    transform: rotateZ(-10deg);
+  }
+  30% {
+    transform: rotateZ(6deg);
+  }
+  35% {
+    transform: rotateZ(-4deg);
+  }
+  40%,
+  100% {
+    transform: rotateZ(0);
+  }
+}
+.rating input[type="checkbox"] {
+  transform: scale(1.3);
+}

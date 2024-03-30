@@ -1,12 +1,24 @@
 // Navbar for the hotel views
-import React from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import "./NavbarHotel.css";
+import BackHomeModal from "./BackHome";
 
 export default function NavbarHotel() {
+  // Open return home modal
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
   return (
     <nav className="nav">
-      <NavLink to="/" className="site-title">
+      <div onClick={openModal} className="site-title">
         OuttaTown
         <lord-icon
           className="site-icon"
@@ -15,14 +27,9 @@ export default function NavbarHotel() {
           colors="primary:#836fff"
           style={{ width: "80px", height: "70px" }}
         ></lord-icon>
-      </NavLink>
+      </div>
 
       <ul>
-        <li>
-          <NavLink to="/views" activeClassName="active">
-            Views
-          </NavLink>
-        </li>
         <li>
           <NavLink to="/my-hotels" activeClassName="active">
             My Hotels
@@ -34,6 +41,7 @@ export default function NavbarHotel() {
           </NavLink>
         </li>
       </ul>
+      <BackHomeModal isOpen={isModalOpen} onClose={closeModal} />
     </nav>
   );
 }
