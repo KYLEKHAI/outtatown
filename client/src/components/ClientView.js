@@ -1,6 +1,7 @@
 // View for the client to search hotel
-
 import React, { useState } from "react";
+
+// Import Components
 import NavbarHotel from "./NavbarHotel";
 import Footer from "./Footer";
 import HotelResults from "./HotelResults";
@@ -32,6 +33,7 @@ const ClientView = () => {
   };
 
   const handleViewSelection = (viewName) => {
+    console.log("Selected view:", viewName);
     setSelectedView(viewName);
   };
 
@@ -258,8 +260,8 @@ const ClientView = () => {
           </div>
         </div>
       </div>
+      <HotelResults selectedView={selectedView} />
       <Help isOpen={isHelpModalOpen} onClose={closeHelpModal} />
-      <HotelResults />
       <Footer />
     </div>
   );
