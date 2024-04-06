@@ -16,7 +16,7 @@ async function runQuery() {
     await client.connect();
 
     // Input the query to run (For Tests)
-    const query = `SELECT * FROM "Outtatown Web App"."Hotel_Room"`;
+    const query = 'SELECT * FROM "Outtatown Web App"."Customer"';
     const result = await client.query(query);
 
     console.log(result.rows);

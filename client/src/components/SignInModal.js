@@ -10,12 +10,13 @@ import "./SignInModal.css";
 // States
 const SignInModal = ({ isOpen, onClose, onOpenSignUp }) => {
   const [sinNumber, setSinNumber] = useState("");
+  const [error, setError] = useState(null);
 
   const openSignUpModal = () => {
     onOpenSignUp();
   };
 
-  const handleSignIn = (event) => {
+  const handleSignIn = async (event) => {
     event.preventDefault();
 
     // Check if input field is empty
@@ -28,8 +29,26 @@ const SignInModal = ({ isOpen, onClose, onOpenSignUp }) => {
     if (sinNumber.length === 9 && !isNaN(sinNumber)) {
       console.log("Signing in with SIN Number:", sinNumber);
 
-      // Go to ClientView.js on successful sign in
-      window.location.href = "/client-view";
+      try {
+        const response = await fetch(`http://localhost:3001/customers`);
+        console.log("Response status:", response.status);
+        const data = await response.json();
+        console.log("Data received:", data);
+
+        const customer = data.find(
+          (customer) => customer.CustomerID === sinNumber
+        );
+        if (customer) {
+          // Go to ClientView.js on successful sign in
+          window.location.href = `/client-view?customerId=${customer.CustomerID}`;
+        } else {
+          alert("Account not found. Please create an account");
+          setError("Account not found");
+        }
+      } catch (error) {
+        console.error("Error:", error);
+        setError("Error occurred. Please try again later.");
+      }
     } else {
       alert("Please enter a valid SIN Number (9 digits)");
     }

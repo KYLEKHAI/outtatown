@@ -32,12 +32,17 @@ export default function NavbarHotel() {
       <ul>
         <li>
           <NavLink to="/my-hotels" activeClassName="active">
-            My Hotels
+            My Bookings
           </NavLink>
         </li>
         <li>
           <NavLink to="/profile" activeClassName="active">
             Profile
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to="/employee" activeClassName="active">
+            Employee Sign In
           </NavLink>
         </li>
       </ul>

@@ -9,9 +9,10 @@ import "./HotelResults.css";
 import HotelBooking from "./HotelBooking";
 
 // Set States
-const HotelRedirect = ({ selectedCity }) => {
+const HotelRedirect = ({ selectedCity, customerId }) => {
   const [hotels, setHotels] = useState([]);
   const [selectedHotelId, setSelectedHotelId] = useState(null);
+  const [selectedRoomNumber, setSelectedRoomNumber] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [hotelRooms, setHotelRooms] = useState([]);
   const [error, setError] = useState(null);
@@ -57,7 +58,9 @@ const HotelRedirect = ({ selectedCity }) => {
     return <div>Error: {error}</div>;
   }
 
-  const openModal = () => {
+  const openModal = (hotelId, roomNumber) => {
+    setSelectedHotelId(hotelId);
+    setSelectedRoomNumber(roomNumber);
     setIsModalOpen(true);
   };
 
@@ -153,13 +156,22 @@ const HotelRedirect = ({ selectedCity }) => {
               <p>
                 <strong>Problems:</strong> {room.Problems.join(", ")}
               </p>
-              <button className="see-more-button" onClick={openModal}>
+              <button
+                className="see-more-button"
+                onClick={() => openModal(room.HotelID, room.RoomNumber)}
+              >
                 Book Room
               </button>
             </div>
           </div>
         ))}
-        <HotelBooking isOpen={isModalOpen} onClose={closeModal} />
+        <HotelBooking
+          isOpen={isModalOpen}
+          onClose={closeModal}
+          customerId={customerId}
+          hotelId={selectedHotelId}
+          roomNumber={selectedRoomNumber}
+        />
       </div>
     </div>
   );

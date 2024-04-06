@@ -1,15 +1,20 @@
 import React from "react";
+
+// Import Modal from React Modal
 import Modal from "react-modal";
+
+// Import Link from  React Router
+import { Link } from "react-router-dom";
+
+// Import CSS
 import "./HomepageModal.css";
 
-const HotelBooking = ({ isOpen, onClose }) => {
+const HotelBooking = ({ isOpen, onClose, customerId, hotelId, roomNumber }) => {
+  console.log("HotelID", hotelId);
+  console.log("Room Number:", roomNumber);
+
   const handleCloseModal = () => {
     onClose();
-  };
-
-  const handleYesButtonClick = () => {
-    console.log("Yes button clicked");
-    // Implement your logic here
   };
 
   return (
@@ -28,9 +33,22 @@ const HotelBooking = ({ isOpen, onClose }) => {
           <button className="no-button" onClick={handleCloseModal}>
             No
           </button>
-          <button className="continue-button" onClick={handleYesButtonClick}>
-            Yes
-          </button>
+          <Link
+            to={
+              customerId
+                ? `/hotel-payment?customerId=${customerId}&hotelId=${hotelId}&roomNumber=${roomNumber}`
+                : "#"
+            }
+            onClick={() => {
+              if (!customerId) {
+                alert(
+                  "You need an account to book a hotel. Return to the homepage and sign in."
+                );
+              }
+            }}
+          >
+            <button className="continue-button">Yes</button>
+          </Link>
         </div>
       </div>
     </Modal>

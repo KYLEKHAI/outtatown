@@ -19,7 +19,7 @@ const SignUpModal = ({ isOpen, onClose }) => {
   const [postalCode, setPostalCode] = useState("");
 
   // Validation for input fields
-  const handleSignUp = (e) => {
+  const handleSignUp = async (e) => {
     e.preventDefault();
 
     // Check if any input field is empty
@@ -63,17 +63,36 @@ const SignUpModal = ({ isOpen, onClose }) => {
       return;
     }
 
-    console.log("Signing up with:", {
-      firstName,
-      lastName,
-      sinNumber,
-      registrationDate,
-      city,
-      province,
-      streetName,
-      postalCode,
-    });
-    onClose();
+    try {
+      const response = await fetch("http://localhost:3001/customers", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          firstName,
+          lastName,
+          sinNumber,
+          registrationDate,
+          city,
+          province,
+          streetName,
+          houseNumber,
+          postalCode,
+        }),
+      });
+
+      if (response.ok) {
+        alert("Account created successfully");
+        onClose();
+      } else {
+        const data = await response.json();
+        alert(data.error || "Failed to create account");
+      }
+    } catch (error) {
+      console.error("Error creating account:", error);
+      alert("Failed to create account. Please try again later.");
+    }
   };
 
   return (

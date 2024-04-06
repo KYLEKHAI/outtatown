@@ -91,17 +91,172 @@ app.get("/hotels", async (req, res) => {
   }
 });
 
-// Define route to fetch hotel rooms based on HotelID
+// Define route to fetch hotel rooms based on HotelID and RoomNumber (if provided)
 app.get("/hotel_rooms/:hotelId", async (req, res) => {
   try {
-    const hotelId = req.params.hotelId;
-    const query =
-      'SELECT * FROM "Outtatown Web App"."Hotel_Room" WHERE "HotelID" = $1';
-    const result = await client.query(query, [hotelId]);
+    const { hotelId } = req.params;
+    const { roomNumber } = req.query;
+
+    let query = `
+      SELECT * 
+      FROM "Outtatown Web App"."Hotel_Room" 
+      WHERE "HotelID" = $1
+    `;
+
+    const params = [hotelId];
+
+    if (roomNumber) {
+      query += ` AND "RoomNumber" = $2`;
+      params.push(roomNumber);
+    }
+
+    const result = await client.query(query, params);
+
+    if (result.rows.length === 0) {
+      res.status(404).json({ error: "Hotel room not found" });
+    } else {
+      res.json(result.rows);
+    }
+  } catch (error) {
+    console.error("Error fetching hotel room:", error);
+    res.status(500).json({ error: "Failed to fetch hotel room" });
+  }
+});
+
+// Define route to get all customer information
+app.get("/customers", async (req, res) => {
+  try {
+    const query = 'SELECT * FROM "Outtatown Web App"."Customer"';
+    const result = await client.query(query);
     res.json(result.rows);
   } catch (error) {
-    console.error("Error fetching hotel rooms by hotel ID:", error);
-    res.status(500).json({ error: "Failed to fetch hotel rooms by hotel ID" });
+    console.error("Error fetching customer information:", error);
+    res.status(500).json({ error: "Failed to fetch customer information" });
+  }
+});
+
+// Define route to add a new customer
+app.post("/customers", async (req, res) => {
+  try {
+    const {
+      firstName,
+      lastName,
+      sinNumber,
+      registrationDate,
+      city,
+      province,
+      streetName,
+      houseNumber,
+      postalCode,
+    } = req.body;
+
+    const query = `
+      INSERT INTO "Outtatown Web App"."Customer" 
+      ("CustomerID", "FirstName", "LastName", "RegistrationDate", "City", "Province", "StreetName", "Number", "PostalCode")
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
+    `;
+    await client.query(query, [
+      sinNumber,
+      firstName,
+      lastName,
+      registrationDate,
+      city,
+      province,
+      streetName,
+      houseNumber,
+      postalCode,
+    ]);
+
+    res.status(201).json({ message: "Customer created successfully" });
+  } catch (error) {
+    console.error("Error creating customer:", error);
+    res.status(500).json({ error: "Failed to create customer" });
+  }
+});
+
+// Define route to update customer information with PaymentCardNumber
+app.put("/customers/:customerId", async (req, res) => {
+  try {
+    const { customerId } = req.params;
+    const { PaymentCardNumber } = req.body;
+
+    const query = `
+      UPDATE "Outtatown Web App"."Customer"
+      SET "PaymentCardNumber" = $1
+      WHERE "CustomerID" = $2
+    `;
+    await client.query(query, [PaymentCardNumber, customerId]);
+
+    res
+      .status(200)
+      .json({ message: "Customer payment information updated successfully" });
+  } catch (error) {
+    console.error("Error updating customer payment information:", error);
+    res
+      .status(500)
+      .json({ error: "Failed to update customer payment information" });
+  }
+});
+
+// Define route to update customer ID in hotel room
+app.put("/hotel_rooms/:hotelId/:roomNumber/:customerId", async (req, res) => {
+  try {
+    const { hotelId, roomNumber, customerId } = req.params;
+
+    const query = `
+      UPDATE "Outtatown Web App"."Hotel_Room"
+      SET "CustomerID" = $1
+      WHERE "HotelID" = $2 AND "RoomNumber" = $3
+    `;
+    await client.query(query, [customerId, hotelId, roomNumber]);
+
+    res
+      .status(200)
+      .json({ message: "Hotel room updated with customer ID successfully" });
+  } catch (error) {
+    console.error("Error updating hotel room with customer ID:", error);
+    res
+      .status(500)
+      .json({ error: "Failed to update hotel room with customer ID" });
+  }
+});
+
+// Define route to fetch hotel rooms with optional customer ID filter
+app.get("/hotel_rooms", async (req, res) => {
+  try {
+    const { customerId } = req.query;
+    let query = 'SELECT * FROM "Outtatown Web App"."Hotel_Room"';
+    const params = [];
+
+    if (customerId) {
+      query += ' WHERE "CustomerID" = $1';
+      params.push(customerId);
+    }
+
+    const result = await client.query(query, params);
+    res.json(result.rows);
+  } catch (error) {
+    console.error("Error fetching hotel rooms:", error);
+    res.status(500).json({ error: "Failed to fetch hotel rooms" });
+  }
+});
+
+// Define route to add booking information to database when paying for a room
+app.post("/bookings", async (req, res) => {
+  try {
+    const { bookingDate, hotelId, roomNumber, customerId } = req.body;
+
+    const query = `
+      INSERT INTO "Outtatown Web App"."Booking" 
+      ("BookingDate", "HotelID", "RoomNumber", "CustomerID")
+      VALUES ($1, $2, $3, $4)
+    `;
+    await client.query(query, [bookingDate, hotelId, roomNumber, customerId]);
+
+    res.status(201).json({ message: "Booking created successfully" });
+  } catch (error) {
+    console.error("Error creating booking:", error);
+    res.status(500).json({ error: "Failed to create booking" });
   }
 });
 

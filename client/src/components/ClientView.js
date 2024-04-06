@@ -1,5 +1,8 @@
 // View for the client to search hotel
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+
+// Import useLocation from React Router
+import { useLocation } from "react-router-dom";
 
 // Import Components
 import NavbarHotel from "./NavbarHotel";
@@ -23,6 +26,17 @@ const ClientView = () => {
     minPrice: "",
     maxPrice: "",
   });
+
+  const [customerId, setCustomerId] = useState(null);
+  const location = useLocation();
+
+  useEffect(() => {
+    const customerIdParam = new URLSearchParams(location.search).get(
+      "customerId"
+    );
+    setCustomerId(customerIdParam);
+    console.log("CustomerID:", customerIdParam);
+  }, [location]);
 
   const openHelpModal = () => {
     setIsHelpModalOpen(true);
@@ -260,7 +274,7 @@ const ClientView = () => {
           </div>
         </div>
       </div>
-      <HotelResults selectedView={selectedView} />
+      <HotelResults selectedView={selectedView} customerId={customerId} />
       <Help isOpen={isHelpModalOpen} onClose={closeHelpModal} />
       <Footer />
     </div>

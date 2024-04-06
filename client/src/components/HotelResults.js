@@ -10,7 +10,7 @@ import HotelRedirect from "./HotelRedirect";
 import HotelRoomsRedirect from "./HotelRoomsRedirect";
 
 // Set States
-const HotelResults = ({ selectedView }) => {
+const HotelResults = ({ selectedView, customerId }) => {
   const [hotelRooms, setHotelRooms] = useState([]);
   const [hotels, setHotels] = useState([]);
   const [error, setError] = useState(null);
@@ -18,6 +18,7 @@ const HotelResults = ({ selectedView }) => {
   const [selectedCity, setSelectedCity] = useState(null);
   const [showHotels, setShowHotels] = useState(false);
   const [selectedHotelId, setSelectedHotelId] = useState(null);
+  const [selectedRoomNumber, setSelectedRoomNumber] = useState(null);
 
   const handleCityClick = (city) => {
     setSelectedCity(city);
@@ -38,8 +39,10 @@ const HotelResults = ({ selectedView }) => {
     setHotels([]);
   };
 
-  const openModal = () => {
+  const openModal = (hotelId, roomNumber) => {
     setIsModalOpen(true);
+    setSelectedHotelId(hotelId);
+    setSelectedRoomNumber(roomNumber);
   };
 
   const closeModal = () => {
@@ -192,7 +195,10 @@ const HotelResults = ({ selectedView }) => {
                 <p>
                   <strong>Problems:</strong> {room.Problems.join(", ")}
                 </p>
-                <button className="see-more-button" onClick={openModal}>
+                <button
+                  className="see-more-button"
+                  onClick={() => openModal(room.HotelID, room.RoomNumber)}
+                >
                   Book Room
                 </button>
               </div>
@@ -254,10 +260,18 @@ const HotelResults = ({ selectedView }) => {
           ))}
         </div>
       )}
-      <HotelBooking isOpen={isModalOpen} onClose={closeModal} />
-      {showHotels && <HotelRedirect selectedCity={selectedCity} />}
+      <HotelBooking
+        isOpen={isModalOpen}
+        onClose={closeModal}
+        customerId={customerId}
+        hotelId={selectedHotelId}
+        roomNumber={selectedRoomNumber}
+      />
+      {showHotels && (
+        <HotelRedirect selectedCity={selectedCity} customerId={customerId} />
+      )}
       {selectedView === "view3" && selectedHotelId && (
-        <HotelRoomsRedirect hotelId={selectedHotelId} />
+        <HotelRoomsRedirect hotelId={selectedHotelId} customerId={customerId} />
       )}
     </div>
   );
