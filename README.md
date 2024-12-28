@@ -63,3 +63,10 @@ npm start
 ```
 
 <u>You can now view a simulated hotel booking system!
+
+### Project Demonstration
+
+Here is a video demonstrating the functionality of the project:
+
+[Youtube Video Demonstration](https://youtu.be/XNB81Xk3v5k)
+
